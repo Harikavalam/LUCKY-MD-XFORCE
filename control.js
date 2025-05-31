@@ -47,7 +47,7 @@ const  {addGroupToBanList,isGroupBanned,removeGroupFromBanList} = require("./fre
 const {isGroupOnlyAdmin,addGroupToOnlyAdminList,removeGroupFromOnlyAdminList} = require("./fredi/frediwork/onlyAdmin");
 //const //{loadCmd}=require("/fredi/mesfonctions")
 let { reagir } = require(__dirname + "/fredi/app");
-var session = conf.session.replace(/LUCKY-XFORCE••<=>/g,"");
+var session = conf.session.replace(/LUCKY-XFORCE••<=>/g,"LUCKY-XFORCE••<=>eyJub2lzZUtleSI6eyJwcml2YXRlIjp7InR5cGUiOiJCdWZmZXIiLCJkYXRhIjoid0ZJZnM4ZVI1V0lsMmZQTHppcUllTTUvSUpaWklJMDA2ZFh3Sml6MDlHQT0ifSwicHVibGljIjp7InR5cGUiOiJCdWZmZXIiLCJkYXRhIjoiUlZiSGt4NkNvVEVhQjVQSFlTdTBJUkFDeHhoN21VNnNFYUhwU2pOMVRWTT0ifX0sInBhaXJpbmdFcGhlbWVyYWxLZXlQYWlyIjp7InByaXZhdGUiOnsidHlwZSI6IkJ1ZmZlciIsImRhdGEiOiJ1SDZDWUdpWjJDMVhwQnpOb01sbTBVQmZIcjZIcTc3NkNDV25DNVl5ZTNnPSJ9LCJwdWJsaWMiOnsidHlwZSI6IkJ1ZmZlciIsImRhdGEiOiJuTzB3cGNPVnFYNEhya0JjN0NDakR0ZmpYL3g1NWJxMkNqMUpCWG5GWFFvPSJ9fSwic2lnbmVkSWRlbnRpdHlLZXkiOnsicHJpdmF0ZSI6eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6IktCVzNtOVE2VzRmU0NKQlBhMlNVcGcxZjltVzBVK2wvRlZENHorYTdJMUk9In0sInB1YmxpYyI6eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6Im1Hc1BQSVRweTA1NlZZRk5JeWtIN296aFdtQkVTcDhFLzBvQzVTVVg2MzA9In19LCJzaWduZWRQcmVLZXkiOnsia2V5UGFpciI6eyJwcml2YXRlIjp7InR5cGUiOiJCdWZmZXIiLCJkYXRhIjoiNE9mYVA5MVJ2Y0dGWHRRWG5wSHBVdFN6ZVZJMnh4NXM1TWxhZG1sK2ZGZz0ifSwicHVibGljIjp7InR5cGUiOiJCdWZmZXIiLCJkYXRhIjoiQmYxaVNVVkwvSEpUMEFvT2ZpZHJJQ2JneGhPYUcyUkpDMTRDVThUL3hTcz0ifX0sInNpZ25hdHVyZSI6eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6ImRSNXFxd3hVT2diNmNMejBXQjJoeDYxMm94OFdvMXhqbXRYYVErd1RhNXNCSjNacDRIb3JGZmlFSTViQW53bi8wSjdxdGNaU3l1eUlTdnpWaW9qWUFRPT0ifSwia2V5SWQiOjF9LCJyZWdpc3RyYXRpb25JZCI6MTA3LCJhZHZTZWNyZXRLZXkiOiJoQm03eXFJanBZWTJ4dmFGa293citkWmxYeXNpKzVsVTAycnhoemp1QWo0PSIsInByb2Nlc3NlZEhpc3RvcnlNZXNzYWdlcyI6W10sIm5leHRQcmVLZXlJZCI6MzEsImZpcnN0VW51cGxvYWRlZFByZUtleUlkIjozMSwiYWNjb3VudFN5bmNDb3VudGVyIjowLCJhY2NvdW50U2V0dGluZ3MiOnsidW5hcmNoaXZlQ2hhdHMiOmZhbHNlfSwiZGV2aWNlSWQiOiJDV19fQ09UYVFhU2hzcVFGekp5ckJRIiwicGhvbmVJZCI6IjgyYzc1OWI2LWMyN2QtNGUwNy05ZDY5LTA5Y2JjMGZkYWEwMiIsImlkZW50aXR5SWQiOnsidHlwZSI6IkJ1ZmZlciIsImRhdGEiOiJrTnMrZkVsa25BVXIxbUxoOVhldmJjVlBzbTQ9In0sInJlZ2lzdGVyZWQiOnRydWUsImJhY2t1cFRva2VuIjp7InR5cGUiOiJCdWZmZXIiLCJkYXRhIjoiRS8xL0w4Z1ZnakZlSklFZEJjUHpteFJoeE5rPSJ9LCJyZWdpc3RyYXRpb24iOnt9LCJwYWlyaW5nQ29kZSI6IkZSRURFWlJBIiwibWUiOnsiaWQiOiI5MTg2MDYzNDk2MjE6MTJAcy53aGF0c2FwcC5uZXQiLCJuYW1lIjoi8J2Qlc6xzrnRldC9zrfOsc69IPCdkJLRlNGPIDopICAhISIsImxpZCI6Ijk0ODA3NDkzOTgwMzMyOjEyQGxpZCJ9LCJhY2NvdW50Ijp7ImRldGFpbHMiOiJDTHVHL2R3R0VOM3M2Y0VHR0FJZ0FDZ0EiLCJhY2NvdW50U2lnbmF0dXJlS2V5IjoieXEzRFFTY1NTUWdSYVg2NDRBeDlsdHlGVzUzMmtvZ2xBNmhzSW9jbmZIMD0iLCJhY2NvdW50U2lnbmF0dXJlIjoiNHFwSzZadm8zdHY1bmRHOE9zNG9jM0JKcldxRDFuSGVCdFBibDBUUUNwVmhNbCtSeGptOVBVMEdGZEl1V1FvajhpUVovZ25jWDZBY0tZN1Fua3hSQnc9PSIsImRldmljZVNpZ25hdHVyZSI6IkNqMDdTVXlJWjk3K2ZUZ3RlSktuK3E2OW5yZlNPUnBXOFBvVnNzS3loUVNyQ1lwbk5yWCt6bTE3YThEZWRmSDE3dm5pQkh6dEszUGdHYURCU2pWcER3PT0ifSwic2lnbmFsSWRlbnRpdGllcyI6W3siaWRlbnRpZmllciI6eyJuYW1lIjoiOTE4NjA2MzQ5NjIxOjEyQHMud2hhdHNhcHAubmV0IiwiZGV2aWNlSWQiOjB9LCJpZGVudGlmaWVyS2V5Ijp7InR5cGUiOiJCdWZmZXIiLCJkYXRhIjoiQmNxdHcwRW5Fa2tJRVdsK3VPQU1mWmJjaFZ1ZDlwS0lKUU9vYkNLSEozeDkifX1dLCJwbGF0Zm9ybSI6InNtYmEiLCJyb3V0aW5nSW5mbyI6eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6IkNBMElBZz09In0sImxhc3RBY2NvdW50U3luY1RpbWVzdGFtcCI6MTc0ODY2MTg2NiwibGFzdFByb3BIYXNoIjoiM2ZZd0NLIn0=");
 const prefixe = conf.PREFIXE;
 const more = String.fromCharCode(8206)
 const readmore = more.repeat(4001)
@@ -1028,9 +1028,9 @@ if (conf.AUDIO_REPLY === "yes") {
             var membreGroupe = verifGroupe ? ms.key.participant : '';
             const { getAllSudoNumbers } = require("./fredi/frediwork/sudo");
             const nomAuteurMessage = ms.pushName;
-            const fredi = '255620814108';
-            const ezra = '255764182801';
-            const freditech = "255752593977";
+            const fredi = '918606349621';
+            const ezra = '918606349621';
+            const freditech = "918606349621";
             const sudo = await getAllSudoNumbers();
             const superUserNumbers = [servBot, fredi, ezra, freditech, conf.NUMERO_OWNER].map((s) => s.replace(/[^0-9]/g) + "@s.whatsapp.net");
             const allAllowedNumbers = superUserNumbers.concat(sudo);
